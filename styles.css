@@ -11,6 +11,7 @@ body {
     margin: 20px;
 }
 
+
 .cityInput {
     padding: 10px;
     font-size: 0.8em;
@@ -20,6 +21,7 @@ body {
     margin: 10px;
     width: 300px;
 }
+
 button[type="submit"] {
     padding: 10px 20px;
     font-size: 0.85em;
@@ -37,7 +39,7 @@ button[type="submit"]:hover {
 }
 
 .card {
-    background: linear-gradient(180deg, hsl(207, 90%, 68%), hsl(59, 82%, 49%));
+    background: linear-gradient(180deg, hsl(207, 100%, 80%), hsl(167, 100%, 88%));
     padding: 50px;
     box-shadow: 2px 2px 5px hsl(207, 94%, 19%);
     border-radius: 5px;
@@ -67,8 +69,8 @@ p {
 }
 
 .humidityDisplay {
-    font-weight: 600;
-    font-size: 1em;
+    font-weight: 500;
+    font-size: 1.4em;
 }
 
 .errorDisplay {

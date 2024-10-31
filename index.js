@@ -15,12 +15,12 @@ weatherForm.addEventListener("submit", async event => {
 
     if(city){
         try{
-            const weatherData = await getWeatherData(city);
+            const weatherData = await getWeatherData(city); //if Weather data is gotten, display it
             displayWeatherInfo(weatherData);
         }
         catch(error){
             console.error(error);
-            displayError(error);
+            displayError(error);        //else if it couldn't be gotten(fetched from API), display error message
         }
     } 
     else{
@@ -49,22 +49,22 @@ async function getWeatherData(city){
 //function to display the weather info in the card after the user searches
 function displayWeatherInfo(data){
 
-    //destructure the JSON data to extra pieces of weather data and store them in variables
+    //destructure the JSON data to extra pieces of weather data(name, main, weather) and store them in variables(city, temp, humidity, description, id)
     const {name: city, 
            main: {temp, humidity},
            weather: [{description, id}]} = data;
     
-    card.textContent = "";
-    card.style.display = "flex";
+    card.textContent = ""; //initialize empty card content
+    card.style.display = "flex"; //the display of the card in the html is none, this would then override it after the search is performed
 
     //define the variables for the html elements to be created
-    const cityDisplay = document.createElement("h1");
+    const cityDisplay = document.createElement("h1"); //creates an h1 element in the html file to display the city
     const tempDisplay = document.createElement("p");
     const humidityDisplay = document.createElement("p");
     const descDisplay = document.createElement("p");
     const weatherEmoji = document.createElement("p");
 
-    //add data to the html elements
+    //add data from the destructured JSON above to the html elements that have been created by using varname.textContent
     cityDisplay.textContent = city;
     tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C`; //alter the formula to display it in Celsius(default is kelvin)
     humidityDisplay.textContent = `Humidity: ${humidity}%`;
@@ -87,26 +87,26 @@ function displayWeatherInfo(data){
 
 }
 
-//get weather emoji based on what the weather is
+//get weather emoji based on what the weather is by using the weatherId from the JSON data gotten as response from the API
 function getWeatherEmoji(weatherId) {
     
     switch(true){
-        case (weatherId >= 200 && weatherId < 300):
+        case (weatherId >= 200 && weatherId < 300):  // display thunderstorm icon
             return "⛈️";
-        case (weatherId >= 300 && weatherId < 400):
+        case (weatherId >= 300 && weatherId < 400):  //display drizzle(light rain) icon
+            return "☔";
+        case (weatherId >= 500 && weatherId < 600):  //display heavy rain icon
             return "🌧️";
-        case (weatherId >= 500 && weatherId < 600):
-            return "🌧️";
-        case (weatherId >= 600 && weatherId < 700):
+        case (weatherId >= 600 && weatherId < 700):   //display snow icon
+            return "❄️";
+         case (weatherId >= 700 && weatherId < 800):  
             return "❄️";
          case (weatherId >= 700 && weatherId < 800):
             return "❄️";
-         case (weatherId >= 700 && weatherId < 800):
-            return "❄️";
-         case (weatherId === 800):
+         case (weatherId === 800):   //display clear sky
             return "☀️";
-        case (weatherId >= 801 && weatherId < 810):
-            return "❄️";
+        case (weatherId >= 801 && weatherId < 810):   //display cloudy icon
+            return "☁️";
         default:
             return "❓";
     }

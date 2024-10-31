@@ -1,17 +1,15 @@
 //weatherApp
 
-const { desc } = require("framer-motion/client");
-
 //needed variables
-const weatherForm = document.querySelector(".weatherForm");
+const weatherForm = document.querySelector(".weatherForm"); //select html element(the weather Form) with the class 'weatherForm'
 const cityInput = document.querySelector(".cityInput");
 const card = document.querySelector(".card");
-const apiKey = "0c1a58cbf603030c50e1fe7be3343e02";
+const apiKey = "714c4f023bc2a8d20f47f61271fdb02f"; //OpenWeather API key
 
 //listen for the submit event(after the user clicks 'get weather')
 weatherForm.addEventListener("submit", async event => {
 
-    event.preventDefault();
+    event.preventDefault(); //prevent the normal HTML action that refreshes forms after input
 
     const city = cityInput.value;
 
@@ -59,6 +57,7 @@ function displayWeatherInfo(data){
     card.textContent = "";
     card.style.display = "flex";
 
+    //define the variables for the html elements to be created
     const cityDisplay = document.createElement("h1");
     const tempDisplay = document.createElement("p");
     const humidityDisplay = document.createElement("p");

@@ -15,16 +15,16 @@ weatherForm.addEventListener("submit", async event => {
 
     if(city){
         try{
-            const weatherData = await getWeatherData(city); //if Weather data is gotten, display it
+            const weatherData = await getWeatherData(city); //if Weather data is gotten, display it on the card using the displayWeatherInfo() function below
             displayWeatherInfo(weatherData);
         }
         catch(error){
             console.error(error);
-            displayError(error);        //else if it couldn't be gotten(fetched from API), display error message
+            displayError(error);        //else if it couldn't be gotten(fetched from API), display error message on the card using the displayError() function below
         }
     } 
     else{
-        displayError("Please enter a valid city")
+        displayError("Please enter a valid city") //extreme case when the city isn't valid and couldn't be processed at all
     }
 
 });
@@ -99,10 +99,8 @@ function getWeatherEmoji(weatherId) {
             return "🌧️";
         case (weatherId >= 600 && weatherId < 700):   //display snow icon
             return "❄️";
-         case (weatherId >= 700 && weatherId < 800):  
-            return "❄️";
-         case (weatherId >= 700 && weatherId < 800):
-            return "❄️";
+         case (weatherId >= 700 && weatherId < 800):  //display icon for unclear atmosphere
+            return "🌫️";
          case (weatherId === 800):   //display clear sky
             return "☀️";
         case (weatherId >= 801 && weatherId < 810):   //display cloudy icon
@@ -120,7 +118,8 @@ function displayError(message){
     errorDisplay.textContent = message;
     errorDisplay.classList.add("errorDisplay") //add the css class(.errorDisplay)
 
+    //design content for card display when it is an error
     card.textContent = "";
     card.style.display = "flex";
-    card.appendChild(errorDisplay);
+    card.appendChild(errorDisplay); //only this error message is added/appended and will display on the card
 }
